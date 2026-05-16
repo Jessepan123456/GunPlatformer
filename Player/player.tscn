@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cn8inqpr5kfw4"]
+
+[ext_resource type="Script" uid="uid://dq2mrr7bkir6s" path="res://Player/scripts/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://djvv8c0afdbxd" path="res://Player/art/Battery.png" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://dgi20bqhivnie" path="res://Player/scripts/statemachine/statemachine.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://begk8ew8gih31" path="res://Player/scripts/statemachine/states/idle.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://dseefk73t2kbd" path="res://Player/scripts/statemachine/states/move.gd" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://drl4xa742my68" path="res://Player/scripts/statemachine/states/jump.gd" id="6_vtle1"]
+[ext_resource type="Script" uid="uid://c14bncx15nyui" path="res://Player/scripts/statemachine/states/fall.gd" id="7_od3ui"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
+radius = 14.035668
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gwnis"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_4ntmi")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_l8h54")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4ntmi")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Animation" type="Node" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+
+[node name="AnimationTree" type="AnimationTree" parent="Animation"]
+tree_root = SubResource("AnimationNodeStateMachine_gwnis")
+advance_expression_base_node = NodePath("../..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Statemachine" type="Node" parent="."]
+script = ExtResource("3_btcbx")
+
+[node name="Idle" type="Node" parent="Statemachine"]
+script = ExtResource("4_gwnis")
+
+[node name="Move" type="Node" parent="Statemachine"]
+script = ExtResource("5_k53q1")
+
+[node name="Jump" type="Node" parent="Statemachine"]
+script = ExtResource("6_vtle1")
+
+[node name="Fall" type="Node" parent="Statemachine"]
+script = ExtResource("7_od3ui")
