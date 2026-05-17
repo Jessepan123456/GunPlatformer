@@ -1,8 +1,11 @@
 class_name State_Jump extends State
 
+@onready var fall: State_Fall = $"../Fall"
+
 ## What happens when the player enters this state
 func enter() -> void:
-	print("Jump")
+	player.jumped = true
+	player.falling = false
 	pass
 
 ## What happen when the player exits this state
@@ -11,6 +14,8 @@ func exit() -> void:
 	
 ## What happen during the _process update in this state
 func Process( _delta : float) -> State:
+	if player.velocity.y > 0 and not player.is_on_floor():
+		return fall 
 	return null
 	
 ## What happen during the _physics_process update in this State
