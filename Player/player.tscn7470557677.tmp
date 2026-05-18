@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cn8inqpr5kfw4"]
+[gd_scene load_steps=44 format=3 uid="uid://cn8inqpr5kfw4"]
 
 [ext_resource type="Script" uid="uid://dq2mrr7bkir6s" path="res://Player/scripts/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://3tvwi8rn3ykk" path="res://Player/art/knight.png" id="2_vtle1"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dnppxq6ttm63g" path="res://Weapons/sheriff/sheriff.tscn" id="9_00tjw"]
 [ext_resource type="Script" uid="uid://dfiflfoxi07u0" path="res://Player/scripts/gun_holder.gd" id="9_x3vf3"]
 [ext_resource type="Script" uid="uid://bvwcj4ru0kdai" path="res://Player/scripts/statemachine/states/shoot.gd" id="10_apopc"]
-[ext_resource type="Script" uid="uid://bj6a181qc34t4" path="res://Player/reload.gd" id="11_5htga"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtle1"]
 radius = 13.0
@@ -380,7 +379,6 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [node name="Player" type="CharacterBody2D"]
 process_mode = 3
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_4ntmi")
 Guns = Array[PackedScene]([ExtResource("9_00tjw")])
 
@@ -441,7 +439,6 @@ script = ExtResource("7_od3ui")
 script = ExtResource("10_apopc")
 
 [node name="Reload" type="Node" parent="Statemachine"]
-script = ExtResource("11_5htga")
 
 [node name="Death" type="Node" parent="Statemachine"]
 
