@@ -1,6 +1,6 @@
 extends Node2D
 
-var current_gun
+var current_gun : Node2D
 var offset := Vector2(0, 0)
 
 func _ready() -> void:
@@ -21,4 +21,6 @@ func set_gun( gun_scene : PackedScene ):
 	
 func remove_gun():
 	current_gun.queue_free()
+	
+
 	

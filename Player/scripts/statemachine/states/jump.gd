@@ -3,7 +3,7 @@ class_name State_Jump extends State
 @onready var fall: State_Fall = $"../Fall"
 
 ## What happens when the player enters this state
-func enter() -> void:
+func enter() -> void: 
 	player.jumped = true
 	player.falling = false
 	pass

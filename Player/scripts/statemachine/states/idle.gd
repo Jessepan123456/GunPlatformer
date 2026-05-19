@@ -2,12 +2,9 @@ class_name State_Idle extends State
 
 @onready var move: State_Move = $"../Move"
 @onready var jump: State_Jump = $"../Jump"
-@onready var shoot: State_Shoot = $"../Shoot"
-@onready var reload: State_Reload = $"../Reload"
 
 ## What happens when the player enters this sdtate
 func enter() -> void:
-	print("Idle")
 	player.jumped = false
 	pass
 
@@ -31,10 +28,5 @@ func HandleInput( _event : InputEvent) -> State:
 	if Input.is_action_just_pressed("Jump") && player.is_on_floor():
 		player.velocity.y = -player.Jump_force 
 		return jump
-	if player.equipped == true:
-		if Input.is_action_just_pressed("Shoot"):
-			return shoot
-		if Input.is_action_just_pressed("reload"):
-			return reload
 	return null
 	

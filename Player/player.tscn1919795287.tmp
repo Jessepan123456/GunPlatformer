@@ -380,6 +380,8 @@ process_mode = 3
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_4ntmi")
+Jump_force = null
+speed = null
 Guns = Array[PackedScene]([ExtResource("9_00tjw")])
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]

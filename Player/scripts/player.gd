@@ -21,7 +21,9 @@ func _ready() -> void:
 	GameManager.player = self
 	pass
 
-
+#func _process(_delta: float) -> void:
+	##print(gun_holder.current_gun.shoot())
+	
 ## Movement/Gravity
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -36,8 +38,13 @@ func _input(_event: InputEvent) -> void:
 	if equipped == false:
 		if Input.is_action_just_pressed("Equip"):
 			equipped = true
-			gun_holder.set_gun(Guns[0])
+			gun_holder.set_gun(Guns[0]) 
+			gun_holder.current_gun.set_ammo_count()
 	else:
 		if Input.is_action_just_pressed("Equip"):
 			equipped = false
 			gun_holder.remove_gun()
+		if Input.is_action_just_pressed("Shoot"):
+			gun_holder.current_gun.shoot()
+		if Input.is_action_just_pressed("reload"):
+			gun_holder.current_gun.reload()
