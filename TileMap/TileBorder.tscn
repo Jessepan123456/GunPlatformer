@@ -1,15 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8fwb3500ej7o"]
+[gd_scene load_steps=5 format=3 uid="uid://c8fwb3500ej7o"]
 
 [ext_resource type="Script" uid="uid://de8bbbvg5bhsl" path="res://TileMap/script/tile_border.gd" id="1_nfrin"]
+[ext_resource type="PackedScene" uid="uid://c3cigbarhroiu" path="res://General/boxes/hitbox.tscn" id="2_4hovc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0b6c"]
 size = Vector2(369, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqocr"]
+size = Vector2(369, 22)
+
 [node name="TileBorder" type="Area2D"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_nfrin")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(174.5, 0)
 shape = SubResource("RectangleShape2D_j0b6c")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_4hovc")]
+collision_layer = 4
+collision_mask = 2
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(174, 0)
+shape = SubResource("RectangleShape2D_cqocr")
+debug_color = Color(0.89274204, 0.29019377, 0.37381822, 0.41960785)

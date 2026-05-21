@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cn8inqpr5kfw4"]
+[gd_scene load_steps=45 format=3 uid="uid://cn8inqpr5kfw4"]
 
 [ext_resource type="Script" uid="uid://dq2mrr7bkir6s" path="res://Player/scripts/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://3tvwi8rn3ykk" path="res://Player/art/knight.png" id="2_vtle1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c14bncx15nyui" path="res://Player/scripts/statemachine/states/fall.gd" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dnppxq6ttm63g" path="res://Weapons/sheriff/sheriff.tscn" id="9_00tjw"]
 [ext_resource type="Script" uid="uid://dfiflfoxi07u0" path="res://Player/scripts/gun_holder.gd" id="9_x3vf3"]
+[ext_resource type="PackedScene" uid="uid://yg4uesnud2xf" path="res://General/boxes/hurtbox.tscn" id="11_apopc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtle1"]
 radius = 13.0
@@ -375,6 +376,10 @@ states/Move/position = Vector2(375, 167)
 states/Start/position = Vector2(191, 111)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_od3ui"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_00tjw"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_apopc"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_5htga"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "Fall", "Move", SubResource("AnimationNodeStateMachineTransition_dkpta")]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_apopc"]
+radius = 13.0
+height = 32.0
+
 [node name="Player" type="CharacterBody2D"]
 process_mode = 3
 collision_layer = 2
@@ -441,3 +446,12 @@ script = ExtResource("7_od3ui")
 
 [node name="GunHolder" type="Node2D" parent="."]
 script = ExtResource("9_x3vf3")
+
+[node name="Hurtbox" parent="." instance=ExtResource("11_apopc")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, -3)
+shape = SubResource("CapsuleShape2D_apopc")
+debug_color = Color(0.32151693, 0.6161677, 0.30793133, 0.41960785)
