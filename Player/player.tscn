@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://drl4xa742my68" path="res://Player/scripts/statemachine/states/jump.gd" id="6_vtle1"]
 [ext_resource type="Script" uid="uid://c14bncx15nyui" path="res://Player/scripts/statemachine/states/fall.gd" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dnppxq6ttm63g" path="res://Weapons/sheriff/sheriff.tscn" id="9_00tjw"]
-[ext_resource type="Script" uid="uid://dfiflfoxi07u0" path="res://Player/scripts/gun_holder.gd" id="9_x3vf3"]
+[ext_resource type="Script" uid="uid://dfiflfoxi07u0" path="res://Player/scripts/holder.gd" id="9_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://yg4uesnud2xf" path="res://General/boxes/hurtbox.tscn" id="11_apopc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtle1"]
@@ -444,7 +444,7 @@ script = ExtResource("7_od3ui")
 
 [node name="Stun" type="Node" parent="Statemachine"]
 
-[node name="GunHolder" type="Node2D" parent="."]
+[node name="Holder" type="Node2D" parent="."]
 script = ExtResource("9_x3vf3")
 
 [node name="Hurtbox" parent="." instance=ExtResource("11_apopc")]

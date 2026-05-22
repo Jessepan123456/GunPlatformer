@@ -11,9 +11,10 @@ class_name Player extends CharacterBody2D
 
 ##Guns
 @export var Guns : Array[PackedScene] = []
-@onready var gun_holder: Node = $GunHolder
+@onready var holder: Node2D = $Holder
 var equipped : bool = false
-var holding : bool = false
+var selected_slot := -1
+var equipped_slot : = -1
 
 var jumped : bool = false
 var falling : bool = false
@@ -46,20 +47,19 @@ func _physics_process(delta: float) -> void:
 	
 ##Player Input
 func _input(_event: InputEvent) -> void:
-	if equipped == true:
-		if Input.is_action_just_pressed("Equip"):
-			gun_holder.set_gun(Guns[0]) 
-			gun_holder.current_gun.set_ammo_count()
-			holding = true
-		if holding == true:
-			if Input.is_action_just_pressed("Shoot"):
-				gun_holder.current_gun.shoot()
-			if Input.is_action_just_pressed("reload"):
-				gun_holder.current_gun.reload()
-			if Input.is_action_pressed("unequip"):
-				equipped = false
-				holding = false
-				gun_holder.remove_gun()
+	if Input.is_action_just_pressed("Equip"):
+		if selected_slot == -1:
+			return
+		if selected_slot == equipped_slot:
+			return
+		equip_weapon( selected_slot )
+	elif equipped == true:
+		if Input.is_action_just_pressed("Shoot"):
+			holder.current_gun.shoot()
+		if Input.is_action_just_pressed("reload"):
+			holder.current_gun.reload()
+		if Input.is_action_just_pressed("unequip"):
+			unequip()
 
 ##HP 
 func take_damage( d : HitBox ) -> void:
@@ -76,5 +76,24 @@ func update_hp( d : HitBox ) -> void:
 	PlayerHub.update_hp_ui(hp)
 	
 ## Equip
-func equip( index : int ) -> void:
+func on_slot_selected( index : int ) -> void:
+	selected_slot = index
+	if equipped == true:
+		unequip()
+	
+func equip_weapon( index : int ) -> void:
+	if index < 0 or index >= Guns.size():
+		return
+		
+	equipped_slot = index
+
+	holder.set_gun(Guns[index])
+	holder.current_gun.set_ammo_count()
 	equipped = true
+	pass
+
+func unequip() -> void:
+	holder.remove_gun()
+	equipped = false
+	equipped_slot = -1
+	pass

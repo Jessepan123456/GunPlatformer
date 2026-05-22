@@ -24,5 +24,5 @@ func set_player( p : Player ) -> void:
 	player = p
 
 func _selected( index : int ) -> void:
-	player.equip( index )
+	player.on_slot_selected( index )
 	
