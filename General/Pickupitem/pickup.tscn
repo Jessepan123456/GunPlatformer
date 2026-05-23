@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1wjk10ir3yqu"]
+
+[ext_resource type="Script" uid="uid://c6uwcj3d032jr" path="res://General/Pickupitem/pickup.gd" id="1_ijqov"]
+
+[node name="Pickupitem" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_ijqov")

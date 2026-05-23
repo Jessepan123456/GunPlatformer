@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cn8inqpr5kfw4"]
+[gd_scene load_steps=47 format=3 uid="uid://cn8inqpr5kfw4"]
 
 [ext_resource type="Script" uid="uid://dq2mrr7bkir6s" path="res://Player/scripts/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://3tvwi8rn3ykk" path="res://Player/art/knight.png" id="2_vtle1"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dnppxq6ttm63g" path="res://Weapons/sheriff/sheriff.tscn" id="9_00tjw"]
 [ext_resource type="Script" uid="uid://dfiflfoxi07u0" path="res://Player/scripts/holder.gd" id="9_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://yg4uesnud2xf" path="res://General/boxes/hurtbox.tscn" id="11_apopc"]
+[ext_resource type="Script" uid="uid://cjb6ecohci2lu" path="res://Player/interaction_box.gd" id="12_5htga"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtle1"]
 radius = 13.0
@@ -380,6 +381,10 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 radius = 13.0
 height = 32.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5htga"]
+radius = 17.0
+height = 34.0
+
 [node name="Player" type="CharacterBody2D"]
 process_mode = 3
 collision_layer = 2
@@ -397,6 +402,7 @@ hframes = 8
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, -3)
 shape = SubResource("CapsuleShape2D_vtle1")
 
@@ -448,6 +454,7 @@ script = ExtResource("7_od3ui")
 script = ExtResource("9_x3vf3")
 
 [node name="Hurtbox" parent="." instance=ExtResource("11_apopc")]
+visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -455,3 +462,13 @@ collision_mask = 4
 position = Vector2(-1, -3)
 shape = SubResource("CapsuleShape2D_apopc")
 debug_color = Color(0.32151693, 0.6161677, 0.30793133, 0.41960785)
+
+[node name="InteractionBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("12_5htga")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionBox"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_5htga")
+debug_color = Color(0.61959255, 0.5285924, 0.23685455, 0.41960785)

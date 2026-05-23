@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://crrbndfeklsqk"]
+[gd_scene load_steps=7 format=3 uid="uid://crrbndfeklsqk"]
 
 [ext_resource type="PackedScene" uid="uid://cgek6r4i0g8rc" path="res://TileMap/Map.tscn" id="1_0k3hq"]
 [ext_resource type="PackedScene" uid="uid://cn8inqpr5kfw4" path="res://Player/player.tscn" id="2_qkk00"]
 [ext_resource type="PackedScene" uid="uid://c8fwb3500ej7o" path="res://TileMap/TileBorder.tscn" id="3_27dpv"]
+[ext_resource type="PackedScene" uid="uid://c1wjk10ir3yqu" path="res://General/Pickupitem/pickup.tscn" id="4_cgger"]
+[ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/icon_gun.png" id="5_12y6g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgger"]
 
 [node name="Platformer" type="Node2D"]
 
@@ -16,3 +20,15 @@ position = Vector2(-2, -15)
 [node name="TileBorder" parent="." instance=ExtResource("3_27dpv")]
 position = Vector2(-323, 136)
 scale = Vector2(2, 2)
+
+[node name="Pickupitem" parent="." instance=ExtResource("4_cgger")]
+position = Vector2(-69, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickupitem"]
+shape = SubResource("CircleShape2D_cgger")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickupitem"]
+texture_filter = 1
+position = Vector2(-4.7683716e-07, 9.536743e-07)
+scale = Vector2(0.6875, 0.6875)
+texture = ExtResource("5_12y6g")
