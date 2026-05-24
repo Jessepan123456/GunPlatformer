@@ -9,6 +9,14 @@ signal slot_selected(index)
 @onready var button_5: Button = $Button5
 @onready var button_6: Button = $Button6
 
+@onready var icons_slots := [
+	$Button/TextureRect,
+	$Button2/TextureRect,
+	$Button3/TextureRect,
+	$Button4/TextureRect,
+	$Button5/TextureRect,
+	$Button6/TextureRect,
+]
 var previous_button 
 
 func _ready() -> void:
@@ -49,3 +57,6 @@ func emit_button( index : int, B : Button) -> void:
 	
 func reset_button( B : Button) -> void:
 	B.modulate = Color.WHITE
+
+func set_icon( index : int ,t : Texture2D) -> void:
+	icons_slots[index].texture = t

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctogtykm565a2"
-path="res://.godot/imported/icon_gun.png-496e95f768df5f8971d01a9b705ca289.ctex"
+path="res://.godot/imported/sheriff_icon.png-906832ecf8f490538b0a9d5fc37f8739.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/art/icon_gun.png"
-dest_files=["res://.godot/imported/icon_gun.png-496e95f768df5f8971d01a9b705ca289.ctex"]
+source_file="res://GUI/art/sheriff_icon.png"
+dest_files=["res://.godot/imported/sheriff_icon.png-906832ecf8f490538b0a9d5fc37f8739.ctex"]
 
 [params]
 

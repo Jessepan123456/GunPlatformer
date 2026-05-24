@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dokcxcso0742p"]
+[gd_scene load_steps=3 format=3 uid="uid://dokcxcso0742p"]
 
 [ext_resource type="Script" uid="uid://7hnjcxqoda6q" path="res://GUI/HotBar/hotbar.gd" id="1_tuos0"]
 [ext_resource type="Texture2D" uid="uid://bunbrle2ttxqq" path="res://GUI/art/Hotbar.png" id="2_tuos0"]
-[ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/icon_gun.png" id="2_v7ull"]
 
 [node name="Hotbar" type="HBoxContainer"]
 anchors_preset = 2
@@ -25,24 +24,53 @@ icon = ExtResource("2_tuos0")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("2_v7ull")
 
 [node name="Button2" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 2
 icon = ExtResource("2_tuos0")
+
+[node name="TextureRect" type="TextureRect" parent="Button2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Button3" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 2
 icon = ExtResource("2_tuos0")
+
+[node name="TextureRect" type="TextureRect" parent="Button3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Button4" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 2
 icon = ExtResource("2_tuos0")
+
+[node name="TextureRect" type="TextureRect" parent="Button4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Button5" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 2
 icon = ExtResource("2_tuos0")
 
+[node name="TextureRect" type="TextureRect" parent="Button5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Button6" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 2
 icon = ExtResource("2_tuos0")
+
+[node name="TextureRect" type="TextureRect" parent="Button6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

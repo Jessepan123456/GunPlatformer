@@ -2,7 +2,7 @@ extends Node2D
 
 ##Gun Info
 @export var bullet_type : PackedScene
-@export var gun_data : GunResource
+@export var gun_stats : GunResource
 
 var ammo : int
 
@@ -26,22 +26,22 @@ func shoot() -> void:
 	bullet.direction = global_transform.x.normalized()
 	
 	#Guns Stats
-	get_parent().get_parent().velocity += -bullet.direction * gun_data.recoil_strength
+	get_parent().get_parent().velocity += -bullet.direction * gun_stats.recoil_strength
 	ammo -= 1
-	GameManager.set_player_ammo(ammo)
+	PlayerManager.set_player_ammo(ammo)
 	
 	pass
 
 func set_ammo_count() -> void:
-	ammo = gun_data.total_ammo
-	GameManager.set_player_total_ammo(gun_data.total_ammo)
+	ammo = gun_stats.total_ammo
+	PlayerManager.set_player_total_ammo(gun_stats.total_ammo)
 
 func reload() -> void:
 	#Reload Animation
 	animation_player.play("reload")
 	
-	await get_tree().create_timer(gun_data.reload_time).timeout
+	await get_tree().create_timer(gun_stats.reload_time).timeout
 	
-	ammo = gun_data.total_ammo
-	GameManager.set_player_ammo(ammo)
+	ammo = gun_stats.total_ammo
+	PlayerManager.set_player_ammo(ammo)
 	pass

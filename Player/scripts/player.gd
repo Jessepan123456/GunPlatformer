@@ -10,7 +10,6 @@ class_name Player extends CharacterBody2D
 @onready var state_machine: State_Machine = $Statemachine
 
 ##Guns
-@export var Guns : Array[PackedScene] = []
 @onready var holder: Node2D = $Holder
 var equipped : bool = false
 var selected_slot := -1
@@ -26,6 +25,7 @@ func _ready() -> void:
 	#Set up
 	state_machine.Initailize(self)
 	GameManager.player = self
+	PlayerManager.player = self
 	hurtbox.damaged.connect( take_damage )
 	PlayerHub.set_hp(hp)
 	PlayerHub.set_player(self)
@@ -82,12 +82,12 @@ func on_slot_selected( index : int ) -> void:
 		unequip()
 	
 func equip_weapon( index : int ) -> void:
-	if index < 0 or index >= Guns.size():
+	if index < 0 or index >= PlayerManager.Inventory.size():
 		return
 		
 	equipped_slot = index
 
-	holder.set_gun(Guns[index])
+	holder.set_gun(PlayerManager.Inventory[index].scene)
 	holder.current_gun.set_ammo_count()
 	equipped = true
 	pass

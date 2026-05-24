@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://crrbndfeklsqk"]
+[gd_scene load_steps=8 format=3 uid="uid://crrbndfeklsqk"]
 
 [ext_resource type="PackedScene" uid="uid://cgek6r4i0g8rc" path="res://TileMap/Map.tscn" id="1_0k3hq"]
 [ext_resource type="PackedScene" uid="uid://cn8inqpr5kfw4" path="res://Player/player.tscn" id="2_qkk00"]
 [ext_resource type="PackedScene" uid="uid://c8fwb3500ej7o" path="res://TileMap/TileBorder.tscn" id="3_27dpv"]
 [ext_resource type="PackedScene" uid="uid://c1wjk10ir3yqu" path="res://General/Pickupitem/pickup.tscn" id="4_cgger"]
-[ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/icon_gun.png" id="5_12y6g"]
+[ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/sheriff_icon.png" id="5_12y6g"]
+[ext_resource type="Resource" uid="uid://bu3dohn2ky40f" path="res://General/ItemData/sheriffData.tres" id="6_77gny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgger"]
 
@@ -21,14 +22,10 @@ position = Vector2(-2, -15)
 position = Vector2(-323, 136)
 scale = Vector2(2, 2)
 
-[node name="Pickupitem" parent="." instance=ExtResource("4_cgger")]
+[node name="PickupSheriff" parent="." instance=ExtResource("4_cgger")]
 position = Vector2(-69, -12)
+item_texture = ExtResource("5_12y6g")
+item = ExtResource("6_77gny")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickupitem"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupSheriff"]
 shape = SubResource("CircleShape2D_cgger")
-
-[node name="Sprite2D" type="Sprite2D" parent="Pickupitem"]
-texture_filter = 1
-position = Vector2(-4.7683716e-07, 9.536743e-07)
-scale = Vector2(0.6875, 0.6875)
-texture = ExtResource("5_12y6g")

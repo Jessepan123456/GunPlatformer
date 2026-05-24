@@ -10,7 +10,7 @@ func _ready() -> void:
 	hotbar.slot_selected.connect( _selected )
 
 func _process(_delta: float) -> void:
-	ammo.text = str(GameManager.player_total_ammo) + "/" + str(GameManager.player_ammo)
+	ammo.text = str(PlayerManager.player_total_ammo) + "/" + str(PlayerManager.player_ammo)
 
 func update_hp_ui( h : int ) -> void:
 	hp.text = "HP: " + str(h)
@@ -26,3 +26,5 @@ func set_player( p : Player ) -> void:
 func _selected( index : int ) -> void:
 	player.on_slot_selected( index )
 	
+func set_slot_icon( i : int, t : Texture2D ) -> void:
+	hotbar.set_icon(i, t)
