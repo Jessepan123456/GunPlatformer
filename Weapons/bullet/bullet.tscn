@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6yt0krm5ovay"]
+[gd_scene load_steps=6 format=3 uid="uid://b6yt0krm5ovay"]
 
 [ext_resource type="Script" uid="uid://nxg613o6th4d" path="res://Weapons/bullet/bullet.gd" id="1_dh7mv"]
 [ext_resource type="Texture2D" uid="uid://dloit2fwc2yjt" path="res://Weapons/art/bullet.png" id="2_rvtmo"]
+[ext_resource type="PackedScene" uid="uid://c3cigbarhroiu" path="res://General/boxes/hitbox.tscn" id="3_rvtmo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7b8l"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pelal"]
 radius = 2.0
 height = 8.0
 
@@ -17,6 +22,17 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_rvtmo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_p7b8l")
+
+[node name="Hitbox" parent="." instance=ExtResource("3_rvtmo")]
+collision_layer = 8
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_pelal")
+debug_color = Color(0.87135303, 0.3181395, 0.38713494, 0.41960785)

@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://br68tsfv7i07t"]
+
+[ext_resource type="Texture2D" uid="uid://b4icfapp6cury" path="res://Tester/art/Dummy.png" id="1_0h3lm"]
+[ext_resource type="Script" uid="uid://dmq4wgcsj8v0f" path="res://Tester/testdummy.gd" id="1_8baph"]
+[ext_resource type="PackedScene" uid="uid://yg4uesnud2xf" path="res://General/boxes/hurtbox.tscn" id="2_f38hi"]
+[ext_resource type="Script" uid="uid://cm6fcs4c62ae" path="res://General/DamageNumber/damage_number_spawner.gd" id="4_hguaf"]
+
+[sub_resource type="Animation" id="Animation_8baph"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hguaf"]
+resource_name = "hitted"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48m2f"]
+_data = {
+&"RESET": SubResource("Animation_8baph"),
+&"hitted": SubResource("Animation_hguaf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8baph"]
+size = Vector2(37.5, 58.25)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hguaf"]
+
+[node name="Testdummy" type="Node2D"]
+script = ExtResource("1_8baph")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_0h3lm")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_48m2f")
+}
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_f38hi")]
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_8baph")
+
+[node name="DamageNumberSpawner" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -20)
+script = ExtResource("4_hguaf")
+label_setting = SubResource("LabelSettings_hguaf")
+metadata/_custom_type_script = "uid://cm6fcs4c62ae"
