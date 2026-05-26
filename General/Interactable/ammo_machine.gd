@@ -1,0 +1,1 @@
+class_name Ammo_Machine extends Area2D

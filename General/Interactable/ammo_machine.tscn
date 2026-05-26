@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://by05hhysjj6rb"]
+
+[ext_resource type="Texture2D" uid="uid://odmc68c1bj2a" path="res://General/art/AmmoMachine.png" id="1_b2dg6"]
+[ext_resource type="Script" uid="uid://ciy143sshqmv7" path="res://General/Interactable/ammo_machine.gd" id="1_l4vmx"]
+
+[node name="AmmoMachine" type="Area2D"]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_l4vmx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("1_b2dg6")

@@ -20,13 +20,17 @@ var falling : bool = false
 
 ## Boxes
 @onready var hurtbox: HurtBox = $Hurtbox
+@onready var interaction_box: Interact_box = $InteractionBox
 
 func _ready() -> void:
 	#Set up
 	state_machine.Initailize(self)
 	GameManager.player = self
 	PlayerManager.player = self
+	
 	hurtbox.damaged.connect( take_damage )
+	interaction_box.Ammo_reset.connect( reset_ammo )
+	
 	PlayerHub.set_hp(hp)
 	PlayerHub.set_player(self)
 	
@@ -57,6 +61,8 @@ func _input(_event: InputEvent) -> void:
 		if Input.is_action_just_pressed("Shoot"):
 			holder.current_gun.shoot()
 		if Input.is_action_just_pressed("reload"):
+			if PlayerManager.player_total_magazine <= 0:
+				return
 			holder.current_gun.reload()
 		if Input.is_action_just_pressed("unequip"):
 			unequip()
@@ -87,6 +93,8 @@ func equip_weapon( index : int ) -> void:
 		
 	equipped_slot = index
 
+	if PlayerManager.Inventory[index] == null:
+		return
 	holder.set_gun(PlayerManager.Inventory[index].scene)
 	holder.current_gun.set_ammo_count()
 	equipped = true
@@ -97,3 +105,8 @@ func unequip() -> void:
 	equipped = false
 	equipped_slot = -1
 	pass
+
+func reset_ammo() -> void:
+	if holder.current_gun == null:
+		return
+	holder.current_gun.reset()

@@ -9,18 +9,21 @@ func _ready() -> void:
 	sprite_2d.texture = item_texture
 	pass
 
+##What happen when you pick up the item
 func picked_up() -> void:
 	var index = get_first_empty_slot()
 	PlayerManager.Inventory[index] = item
 	add_icon(index)
 	queue_free()
 
+##Get the first slot so it moves over and not overlap
 func get_first_empty_slot() -> int:
 	for i in range(PlayerManager.Inventory.size()):
 		if PlayerManager.Inventory[i] == null:
 			return i
 	return -1
 	
+##Images for each slot when pick up
 func add_icon( i : int ) -> void:
 	if i == -1:
 		return

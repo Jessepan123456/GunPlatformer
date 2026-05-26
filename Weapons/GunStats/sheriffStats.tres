@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_xt5sc")
+life_span = 0.5
 metadata/_custom_type_script = "uid://c5txms3yscn71"

@@ -9,8 +9,9 @@ var player
 func _ready() -> void:
 	hotbar.slot_selected.connect( _selected )
 
+##Displaying the Ammo
 func _process(_delta: float) -> void:
-	ammo.text = str(PlayerManager.player_total_ammo) + "/" + str(PlayerManager.player_ammo)
+	ammo.text = str(PlayerManager.player_total_magazine) + "/" + str(PlayerManager.player_ammo)
 
 func update_hp_ui( h : int ) -> void:
 	hp.text = "HP: " + str(h)
