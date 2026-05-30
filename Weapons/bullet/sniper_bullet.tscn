@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgmex0ajmotrl"]
+
+[ext_resource type="Script" uid="uid://bx1i7dvu7ol6n" path="res://Weapons/bullet/script/sniper_bullet.gd" id="1_cus0h"]
+[ext_resource type="Texture2D" uid="uid://dp5ipl81628c6" path="res://Weapons/art/SniperBullet.png" id="2_cus0h"]
+[ext_resource type="PackedScene" uid="uid://c3cigbarhroiu" path="res://General/boxes/hitbox.tscn" id="3_cioec"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7b8l"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pelal"]
+radius = 3.0
+height = 20.0
+
+[node name="Sniper_bullet" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_cus0h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_cus0h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_p7b8l")
+
+[node name="Hitbox" parent="." instance=ExtResource("3_cioec")]
+collision_layer = 8
+collision_mask = 32
+damage = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_pelal")
+debug_color = Color(0.87135303, 0.3181395, 0.38713494, 0.41960785)

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GunResource" load_steps=2 format=3 uid="uid://bsh2mlsgcpet"]
+
+[ext_resource type="Script" uid="uid://c5txms3yscn71" path="res://Weapons/GunStats/GunResource.gd" id="1_b3b6j"]
+
+[resource]
+script = ExtResource("1_b3b6j")
+recoil_strength = 300
+magazine = 1
+total_ammo = 8
+reload_time = 2.5
+life_span = 3.0
+metadata/_custom_type_script = "uid://c5txms3yscn71"

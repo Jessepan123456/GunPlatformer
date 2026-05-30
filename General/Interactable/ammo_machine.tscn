@@ -1,7 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://by05hhysjj6rb"]
+[gd_scene load_steps=6 format=3 uid="uid://by05hhysjj6rb"]
 
 [ext_resource type="Texture2D" uid="uid://odmc68c1bj2a" path="res://General/art/AmmoMachine.png" id="1_b2dg6"]
 [ext_resource type="Script" uid="uid://ciy143sshqmv7" path="res://General/Interactable/ammo_machine.gd" id="1_l4vmx"]
+
+[sub_resource type="Animation" id="Animation_l4vmx"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_6y8bg"]
+resource_name = "Interact"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhuy2"]
+_data = {
+&"Interact": SubResource("Animation_6y8bg"),
+&"RESET": SubResource("Animation_l4vmx")
+}
 
 [node name="AmmoMachine" type="Area2D"]
 collision_layer = 64
@@ -12,3 +50,10 @@ script = ExtResource("1_l4vmx")
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("1_b2dg6")
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jhuy2")
+}

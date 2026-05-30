@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgw4cxy7b8d1a"
-path="res://.godot/imported/AmmoMachine.png-f56f4b96359651aa636f7d32171fa695.ctex"
+uid="uid://jmpgpjys04cy"
+path="res://.godot/imported/Shotgun-icon.png-fd50a7462802e3faf50cc0256d28e9a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://General/ItemData/AmmoMachine.png"
-dest_files=["res://.godot/imported/AmmoMachine.png-f56f4b96359651aa636f7d32171fa695.ctex"]
+source_file="res://General/art/Shotgun-icon.png"
+dest_files=["res://.godot/imported/Shotgun-icon.png-fd50a7462802e3faf50cc0256d28e9a8.ctex"]
 
 [params]
 

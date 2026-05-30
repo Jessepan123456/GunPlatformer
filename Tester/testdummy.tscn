@@ -43,7 +43,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8baph"]
-size = Vector2(37.5, 58.25)
+size = Vector2(37.5, 36.125)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hguaf"]
 
@@ -66,7 +66,7 @@ collision_layer = 32
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 3)
+position = Vector2(0, -8.0625)
 shape = SubResource("RectangleShape2D_8baph")
 
 [node name="DamageNumberSpawner" type="Node2D" parent="."]

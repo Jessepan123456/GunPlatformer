@@ -1,6 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1wjk10ir3yqu"]
+[gd_scene load_steps=6 format=3 uid="uid://c1wjk10ir3yqu"]
 
 [ext_resource type="Script" uid="uid://c6uwcj3d032jr" path="res://General/Pickupitem/pickup.gd" id="1_ijqov"]
+[ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/sheriff_icon.png" id="2_rs527"]
+
+[sub_resource type="Animation" id="Animation_rs527"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.875, 0.875)]
+}
+
+[sub_resource type="Animation" id="Animation_vwhbm"]
+resource_name = "on_ground"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58ns1"]
+_data = {
+&"RESET": SubResource("Animation_rs527"),
+&"on_ground": SubResource("Animation_vwhbm")
+}
 
 [node name="Pickupitem" type="Area2D"]
 collision_layer = 16
@@ -11,3 +49,10 @@ script = ExtResource("1_ijqov")
 texture_filter = 1
 position = Vector2(-2, -2)
 scale = Vector2(0.875, 0.875)
+texture = ExtResource("2_rs527")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_58ns1")
+}
+autoplay = "on_ground"

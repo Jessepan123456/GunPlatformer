@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://e45qtdugjjw0"]
+
+[ext_resource type="Texture2D" uid="uid://bb3as7e3utdwx" path="res://General/art/Sniper-icon.png" id="1_4os21"]
+[ext_resource type="Script" uid="uid://cu0y11e0voww7" path="res://General/ItemData/ItemData.gd" id="1_nxvn1"]
+[ext_resource type="PackedScene" uid="uid://kuhlmej4e0ux" path="res://Weapons/Guns/sniper/sniper.tscn" id="2_iycm4"]
+
+[resource]
+script = ExtResource("1_nxvn1")
+name = "Sniper"
+icon = ExtResource("1_4os21")
+scene = ExtResource("2_iycm4")
+metadata/_custom_type_script = "uid://cu0y11e0voww7"

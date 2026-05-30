@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://crrbndfeklsqk"]
+[gd_scene load_steps=15 format=3 uid="uid://crrbndfeklsqk"]
 
 [ext_resource type="PackedScene" uid="uid://cgek6r4i0g8rc" path="res://TileMap/Map.tscn" id="1_0k3hq"]
 [ext_resource type="PackedScene" uid="uid://cn8inqpr5kfw4" path="res://Player/player.tscn" id="2_qkk00"]
@@ -6,10 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://c1wjk10ir3yqu" path="res://General/Pickupitem/pickup.tscn" id="4_cgger"]
 [ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/sheriff_icon.png" id="5_12y6g"]
 [ext_resource type="Resource" uid="uid://bu3dohn2ky40f" path="res://General/ItemData/sheriffData.tres" id="6_77gny"]
+[ext_resource type="Texture2D" uid="uid://bb3as7e3utdwx" path="res://General/art/Sniper-icon.png" id="7_jiqxb"]
 [ext_resource type="PackedScene" uid="uid://br68tsfv7i07t" path="res://Tester/testdummy.tscn" id="7_qu7gd"]
+[ext_resource type="Resource" uid="uid://e45qtdugjjw0" path="res://General/ItemData/sniperData.tres" id="8_05l1n"]
 [ext_resource type="PackedScene" uid="uid://by05hhysjj6rb" path="res://General/Interactable/ammo_machine.tscn" id="8_70n8b"]
+[ext_resource type="Texture2D" uid="uid://jmpgpjys04cy" path="res://General/art/Shotgun-icon.png" id="9_31ngy"]
+[ext_resource type="Resource" uid="uid://b37xllqqf6ua8" path="res://General/ItemData/shotgunData.tres" id="10_62ty1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgger"]
+radius = 11.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70n8b"]
 size = Vector2(52.25, 84.25)
@@ -28,17 +33,36 @@ position = Vector2(-2, -15)
 position = Vector2(-323, 136)
 scale = Vector2(2, 2)
 
-[node name="PickupSheriff" parent="." instance=ExtResource("4_cgger")]
-position = Vector2(-69, -12)
+[node name="PickUpItems" type="Node" parent="."]
+
+[node name="PickupSheriff" parent="PickUpItems" instance=ExtResource("4_cgger")]
+position = Vector2(-79, -12)
 item_texture = ExtResource("5_12y6g")
 item = ExtResource("6_77gny")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupSheriff"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupSheriff"]
 shape = SubResource("CircleShape2D_cgger")
 debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 
-[node name="Testdummy" parent="." instance=ExtResource("7_qu7gd")]
-position = Vector2(235, -32)
+[node name="PickupSniper" parent="PickUpItems" instance=ExtResource("4_cgger")]
+position = Vector2(-116, -12)
+item_texture = ExtResource("7_jiqxb")
+item = ExtResource("8_05l1n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupSniper"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_cgger")
+debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
+
+[node name="PickupSniper2" parent="PickUpItems" instance=ExtResource("4_cgger")]
+position = Vector2(-41, -11)
+item_texture = ExtResource("9_31ngy")
+item = ExtResource("10_62ty1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupSniper2"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_cgger")
+debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 
 [node name="AmmoMachine" parent="." instance=ExtResource("8_70n8b")]
 position = Vector2(-172, -49)
@@ -47,3 +71,11 @@ position = Vector2(-172, -49)
 position = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_70n8b")
 debug_color = Color(0.7882353, 0.8509804, 0.17254902, 0.41960785)
+
+[node name="Dummy" type="Node" parent="."]
+
+[node name="Testdummy" parent="Dummy" instance=ExtResource("7_qu7gd")]
+position = Vector2(235, -32)
+
+[node name="Testdummy2" parent="Dummy" instance=ExtResource("7_qu7gd")]
+position = Vector2(157, -31)

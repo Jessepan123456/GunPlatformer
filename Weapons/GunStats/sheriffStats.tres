@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_xt5sc")
+recoil_strength = 50
+total_ammo = 25
 life_span = 0.5
 metadata/_custom_type_script = "uid://c5txms3yscn71"

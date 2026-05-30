@@ -4,9 +4,11 @@ class_name PickUp extends Area2D
 @export var item : ItemData
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	sprite_2d.texture = item_texture
+	animation_player.play("on_ground")
 	pass
 
 ##What happen when you pick up the item
