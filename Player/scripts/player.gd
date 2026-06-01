@@ -3,7 +3,6 @@ class_name Player extends CharacterBody2D
 ##Player movement
 @export var Jump_force : int = 500
 @export var speed : int = 200
-@export var hp : int = 6
 
 ##Player States
 @onready var animation_player: AnimationPlayer = $Animation/AnimationPlayer
@@ -13,7 +12,8 @@ class_name Player extends CharacterBody2D
 @onready var holder: Node2D = $Holder
 var equipped : bool = false
 var selected_slot := -1
-var equipped_slot : = -1
+var equipped_slot := -1
+var is_gun := false
 
 var jumped : bool = false
 var falling : bool = false
@@ -31,7 +31,7 @@ func _ready() -> void:
 	hurtbox.damaged.connect( take_damage )
 	interaction_box.Ammo_reset.connect( reset_ammo )
 	
-	PlayerHub.set_hp(hp)
+	PlayerHub.set_hp(PlayerManager.hp)
 	PlayerHub.set_player(self)
 	
 	pass
@@ -56,11 +56,18 @@ func _input(_event: InputEvent) -> void:
 			return
 		if selected_slot == equipped_slot:
 			return
-		equip_weapon( selected_slot )
+		use( selected_slot )
 	elif equipped == true:
-		if Input.is_action_just_pressed("Shoot"):
-			holder.current_gun.shoot()
+		if Input.is_action_just_pressed("Use"):
+			if PlayerManager.Inventory[equipped_slot].type == ItemData.ItemType.GUN:
+				holder.current_item.shoot()
+			else:
+				if !holder.current_item:
+					return
+				holder.current_item.use()
 		if Input.is_action_just_pressed("reload"):
+			if !PlayerManager.Inventory[equipped_slot].type == ItemData.ItemType.GUN:
+				return
 			if PlayerManager.player_total_magazine <= 0:
 				return
 			holder.current_gun.reload()
@@ -69,17 +76,17 @@ func _input(_event: InputEvent) -> void:
 
 ##HP 
 func take_damage( d : HitBox ) -> void:
-	if hp <= 0:
+	if PlayerManager.hp <= 0:
 		GameManager.respawn()
-		hp = 6
-		PlayerHub.update_hp_ui(hp)
+		PlayerManager.hp = 6
+		PlayerHub.update_hp_ui(PlayerManager.hp)
 	else:
 		update_hp(d)
 	pass
 
 func update_hp( d : HitBox ) -> void:
-	hp -= d.damage
-	PlayerHub.update_hp_ui(hp)
+	PlayerManager.hp -= d.damage
+	PlayerHub.update_hp_ui(PlayerManager.hp)
 	
 ## Equip
 func on_slot_selected( index : int ) -> void:
@@ -87,26 +94,27 @@ func on_slot_selected( index : int ) -> void:
 	if equipped == true:
 		unequip()
 	
-func equip_weapon( index : int ) -> void:
+func use( index : int ) -> void:
 	if index < 0 or index >= PlayerManager.Inventory.size():
 		return
 		
 	equipped_slot = index
-
+	
 	if PlayerManager.Inventory[index] == null:
 		return
-	holder.set_gun(PlayerManager.Inventory[index].scene)
-	holder.current_gun.set_ammo_count()
+	holder.set_item(PlayerManager.Inventory[index].scene)
+	if PlayerManager.Inventory[index].type == ItemData.ItemType.GUN:
+		holder.current_item.set_ammo_count()
 	equipped = true
 	pass
 
 func unequip() -> void:
-	holder.remove_gun()
+	holder.remove_item()
 	equipped = false
 	equipped_slot = -1
 	pass
 
 func reset_ammo() -> void:
-	if holder.current_gun == null:
+	if holder.current_item == null:
 		return
-	holder.current_gun.reset()
+	holder.current_item.reset()

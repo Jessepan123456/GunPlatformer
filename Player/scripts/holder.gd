@@ -1,6 +1,6 @@
 extends Node2D
 
-var current_gun : Node2D
+var current_item : Node2D
 var offset := Vector2(0, 0)
 
 func _ready() -> void:
@@ -15,12 +15,12 @@ func _process(_delta: float) -> void:
 	else:
 		scale.y = 1
 
-func set_gun( gun_scene : PackedScene ):
-	current_gun = gun_scene.instantiate()
-	add_child(current_gun)
+func set_item( gun_scene : PackedScene ):
+	current_item = gun_scene.instantiate()
+	add_child(current_item)
 	
-func remove_gun():
-	current_gun.queue_free()
+func remove_item():
+	current_item.queue_free()
 	
 
 	

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0va3sxwp5yqf"]
+
+[ext_resource type="Texture2D" uid="uid://ddn2tsdts8aiw" path="res://Items/art/Heal Potion.png" id="1_i6h62"]
+[ext_resource type="Script" uid="uid://cptdyk5e3dpwo" path="res://Items/Heal_Potion/heal_potion.gd" id="1_qejh1"]
+
+[node name="HealPotion" type="Node2D"]
+script = ExtResource("1_qejh1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_i6h62")

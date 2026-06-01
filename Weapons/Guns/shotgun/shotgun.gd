@@ -5,16 +5,36 @@ extends Node2D
 @export var gun_stats : GunResource
 
 ##For reset purpose
-var ammo : int  = 15
-var magazine : int = 2
+var ammo := 18
+var magazine := 2
+
+var can_shoot := true
 
 @onready var hole: Node2D = $Hole
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func shoot() -> void:
+	#Prevent from shooting
+	if can_shoot == false:
+		return
 	if gun_stats.ammo == 0:
 		return
+		
+	can_shoot = false
+	
+	for i in range(6):
+		shoot_bullet()
+		
+	#Ammo Count
+	gun_stats.ammo -= 6
+	PlayerManager.set_player_ammo(gun_stats.ammo)
+	
+	await get_tree().create_timer(gun_stats.fire_rate).timeout
+	can_shoot = true
+	pass
+
+func shoot_bullet() -> void:
 	var bullet = bullet_type.instantiate()
 	
 	get_tree().current_scene.add_child(bullet)
@@ -25,18 +45,19 @@ func shoot() -> void:
 	gpu_particles_2d.restart()
 	animation_player.play("Shoot")
 	
-	bullet.direction = global_transform.x.normalized()
+	var spread := 0.4
 	
-	#Guns Stats
-	get_parent().get_parent().velocity += -bullet.direction * gun_stats.recoil_strength
-	gun_stats.ammo -= 1
-	PlayerManager.set_player_ammo(gun_stats.ammo)
+	bullet.direction = global_transform.x.rotated(randf_range(spread, -spread)).normalized()
 	
-	bullet.set_life_span(gun_stats.life_span)
-	pass
+	bullet_stats(bullet)
 
+func bullet_stats( b ) -> void:
+	get_parent().get_parent().velocity += -b.direction * gun_stats.recoil_strength
+	b.set_life_span(gun_stats.life_span)
+	
 func set_ammo_count() -> void:
 	PlayerManager.set_player_total_magazine(gun_stats.magazine)
+	PlayerManager.set_player_ammo(gun_stats.ammo)
 
 func reload() -> void:
 	#Reload Animation

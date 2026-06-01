@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_8aqst")
-recoil_strength = 150
 magazine = 2
-total_ammo = 15
+total_ammo = 18
+ammo = 18
 reload_time = 2.0
 life_span = 0.4
 metadata/_custom_type_script = "uid://c5txms3yscn71"

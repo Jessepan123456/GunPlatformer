@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://crrbndfeklsqk"]
+[gd_scene load_steps=17 format=3 uid="uid://crrbndfeklsqk"]
 
 [ext_resource type="PackedScene" uid="uid://cgek6r4i0g8rc" path="res://TileMap/Map.tscn" id="1_0k3hq"]
 [ext_resource type="PackedScene" uid="uid://cn8inqpr5kfw4" path="res://Player/player.tscn" id="2_qkk00"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://by05hhysjj6rb" path="res://General/Interactable/ammo_machine.tscn" id="8_70n8b"]
 [ext_resource type="Texture2D" uid="uid://jmpgpjys04cy" path="res://General/art/Shotgun-icon.png" id="9_31ngy"]
 [ext_resource type="Resource" uid="uid://b37xllqqf6ua8" path="res://General/ItemData/shotgunData.tres" id="10_62ty1"]
+[ext_resource type="Texture2D" uid="uid://ddn2tsdts8aiw" path="res://Items/art/Heal Potion.png" id="11_iymn6"]
+[ext_resource type="Resource" uid="uid://ccieaa0vut48q" path="res://General/ItemData/heal_PotionData.tres" id="12_702mt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgger"]
 radius = 11.0
@@ -54,13 +56,23 @@ position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_cgger")
 debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 
-[node name="PickupSniper2" parent="PickUpItems" instance=ExtResource("4_cgger")]
+[node name="PickupShotgun" parent="PickUpItems" instance=ExtResource("4_cgger")]
 position = Vector2(-41, -11)
 item_texture = ExtResource("9_31ngy")
 item = ExtResource("10_62ty1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupSniper2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupShotgun"]
 position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_cgger")
+debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
+
+[node name="PickupPotion" parent="PickUpItems" instance=ExtResource("4_cgger")]
+position = Vector2(56, -10)
+item_texture = ExtResource("11_iymn6")
+item = ExtResource("12_702mt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupPotion"]
+position = Vector2(-1, -2)
 shape = SubResource("CircleShape2D_cgger")
 debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 

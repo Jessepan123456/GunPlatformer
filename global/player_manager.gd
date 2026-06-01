@@ -2,6 +2,7 @@ extends Node
 
 var Inventory : Array[ItemData] = [null, null, null, null, null, null]
 var player : Node = null
+var hp : int = 6
 
 ## Player Info Update
 var player_ammo : int
