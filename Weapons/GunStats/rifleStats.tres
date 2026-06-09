@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GunResource" load_steps=2 format=3 uid="uid://busd3v14t5yd8"]
+
+[ext_resource type="Script" uid="uid://c5txms3yscn71" path="res://Weapons/GunStats/GunResource.gd" id="1_wfk40"]
+
+[resource]
+script = ExtResource("1_wfk40")
+recoil_strength = 60.0
+fire_rate = 0.2
+magazine = 15
+total_ammo = 60
+ammo = 60
+reload_time = 1.5
+metadata/_custom_type_script = "uid://c5txms3yscn71"

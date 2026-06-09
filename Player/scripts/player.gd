@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 ##Player movement
-@export var Jump_force : int = 500
+@export var Jump_force : int = 450
 @export var speed : int = 200
 
 ##Player States
@@ -64,7 +64,9 @@ func _input(_event: InputEvent) -> void:
 			else:
 				if !holder.current_item:
 					return
-				holder.current_item.use()
+				holder.current_item.use(equipped_slot)
+				if holder.current_item.used == true:
+					unequip()
 		if Input.is_action_just_pressed("reload"):
 			if !PlayerManager.Inventory[equipped_slot].type == ItemData.ItemType.GUN:
 				return
@@ -118,3 +120,8 @@ func reset_ammo() -> void:
 	if holder.current_item == null:
 		return
 	holder.current_item.reset()
+	
+func is_slot_empty( i : int) -> bool:
+	if PlayerManager.Inventory[i] != null:
+		return false
+	return true

@@ -63,3 +63,6 @@ func reset_button( B : Button) -> void:
 
 func set_icon( index : int ,t : Texture2D) -> void:
 	icons_slots[index].texture = t
+
+func remove_icon( index : int ) -> void:
+	icons_slots[index].texture = null

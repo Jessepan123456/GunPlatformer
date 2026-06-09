@@ -20,6 +20,8 @@ func set_item( gun_scene : PackedScene ):
 	add_child(current_item)
 	
 func remove_item():
+	if !current_item:
+		return
 	current_item.queue_free()
 	
 

@@ -16,3 +16,7 @@ func set_player_total_magazine( i : int ) -> void:
 
 func update_player_total_magazine() -> void:
 	player_total_magazine -= 1
+	
+func update_used( i : int) -> void:
+	Inventory[i] = null
+	pass

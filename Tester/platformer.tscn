@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://crrbndfeklsqk"]
+[gd_scene load_steps=23 format=3 uid="uid://crrbndfeklsqk"]
 
 [ext_resource type="PackedScene" uid="uid://cgek6r4i0g8rc" path="res://TileMap/Map.tscn" id="1_0k3hq"]
 [ext_resource type="PackedScene" uid="uid://cn8inqpr5kfw4" path="res://Player/player.tscn" id="2_qkk00"]
@@ -6,14 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://c1wjk10ir3yqu" path="res://General/Pickupitem/pickup.tscn" id="4_cgger"]
 [ext_resource type="Texture2D" uid="uid://ctogtykm565a2" path="res://GUI/art/sheriff_icon.png" id="5_12y6g"]
 [ext_resource type="Resource" uid="uid://bu3dohn2ky40f" path="res://General/ItemData/sheriffData.tres" id="6_77gny"]
+[ext_resource type="Texture2D" uid="uid://b5luyy3i4bxw8" path="res://General/art/Rifle_icon.png" id="7_i5bkb"]
 [ext_resource type="Texture2D" uid="uid://bb3as7e3utdwx" path="res://General/art/Sniper-icon.png" id="7_jiqxb"]
 [ext_resource type="PackedScene" uid="uid://br68tsfv7i07t" path="res://Tester/testdummy.tscn" id="7_qu7gd"]
+[ext_resource type="Resource" uid="uid://d2kslflkkexv7" path="res://General/ItemData/rifleData.tres" id="8_5gjey"]
 [ext_resource type="Resource" uid="uid://e45qtdugjjw0" path="res://General/ItemData/sniperData.tres" id="8_05l1n"]
 [ext_resource type="PackedScene" uid="uid://by05hhysjj6rb" path="res://General/Interactable/ammo_machine.tscn" id="8_70n8b"]
 [ext_resource type="Texture2D" uid="uid://jmpgpjys04cy" path="res://General/art/Shotgun-icon.png" id="9_31ngy"]
 [ext_resource type="Resource" uid="uid://b37xllqqf6ua8" path="res://General/ItemData/shotgunData.tres" id="10_62ty1"]
 [ext_resource type="Texture2D" uid="uid://ddn2tsdts8aiw" path="res://Items/art/Heal Potion.png" id="11_iymn6"]
 [ext_resource type="Resource" uid="uid://ccieaa0vut48q" path="res://General/ItemData/heal_PotionData.tres" id="12_702mt"]
+[ext_resource type="PackedScene" uid="uid://cbu158uyt0iw0" path="res://TileMap/Other_obstacles/Platform/platform.tscn" id="17_5gjey"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgger"]
 radius = 11.0
@@ -21,19 +24,57 @@ radius = 11.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70n8b"]
 size = Vector2(52.25, 84.25)
 
+[sub_resource type="Animation" id="Animation_5gjey"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(339, 6), Vector2(605, 8.000001)]
+}
+
+[sub_resource type="Animation" id="Animation_4hlo6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(339, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bj0i"]
+_data = {
+&"RESET": SubResource("Animation_4hlo6"),
+&"move": SubResource("Animation_5gjey")
+}
+
 [node name="Platformer" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("1_0k3hq")]
 texture_filter = 1
-layer_0/tile_data = PackedInt32Array(65535, 1, 0, 0, 1, 0, 131071, 1, 1, 65536, 65537, 1, 196607, 65537, 0, 131072, 1, 1, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 65537, 65537, 0, 65539, 65537, 0, 131077, 65537, 0, 131080, 65537, 0, 131084, 65537, 1, 65551, 65537, 0, 65553, 65537, 0, 65554, 65537, 0, 65542, 65537, 1, 65546, 65537, 1, 131089, 65537, 1, 131073, 1, 1, 131074, 1, 1, 65538, 1, 1, 131075, 1, 1, 131076, 1, 1, 65540, 1, 1, 65541, 1, 1, 131078, 1, 1, 131079, 1, 1, 65543, 1, 1, 65544, 1, 1, 65545, 1, 1, 131081, 1, 1, 131082, 1, 1, 131083, 1, 1, 65547, 1, 1, 65548, 1, 1, 65549, 1, 1, 65550, 1, 1, 131086, 1, 1, 131085, 1, 1, 131087, 1, 1, 131088, 1, 1, 65552, 1, 1, 131090, 1, 1, 65534, 131073, 0, 65533, 131073, 0, 65532, 131073, 0, 65531, 131073, 0, 65530, 131073, 0, 65529, 131073, 0, 65528, 131073, 0, 65527, 131073, 0, 65526, 131073, 0, 65525, 131073, 0, 131070, 131073, 1, 131069, 196609, 0, 131068, 131073, 1, 131067, 196609, 1, 131066, 131073, 1, 131065, 131073, 1, 131064, 131073, 1, 131063, 196609, 0, 131062, 131073, 1, 131061, 131073, 1, 196597, 131073, 1, 196598, 131073, 1, 196599, 131073, 1, 196600, 196609, 1, 196601, 131073, 1, 196602, 196609, 0, 196603, 196609, 0, 196604, 131073, 1, 196605, 131073, 1, 196606, 131073, 1, 65524, 131073, 0, 65523, 131073, 0, 65522, 131073, 0, 65521, 131073, 0, 65520, 131073, 0, 131059, 196609, 0, 196593, 196609, 0, 196592, 196609, 1, 131057, 196609, 1, 131056, 131073, 1, 131058, 131073, 1, 196594, 131073, 1, 196595, 131073, 1, 196596, 131073, 1, 131060, 131073, 1)
+layer_0/tile_data = PackedInt32Array(65535, 1, 0, 0, 1, 0, 131071, 1, 1, 65536, 65537, 1, 196607, 65537, 0, 131072, 1, 1, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 65537, 65537, 0, 65539, 65537, 0, 131077, 65537, 0, 131080, 65537, 0, 131084, 65537, 1, 65551, 65537, 0, 65553, 65537, 0, 65554, 65537, 0, 65542, 65537, 1, 65546, 65537, 1, 131089, 65537, 1, 131073, 1, 1, 131074, 1, 1, 65538, 1, 1, 131075, 1, 1, 131076, 1, 1, 65540, 1, 1, 65541, 1, 1, 131078, 1, 1, 131079, 1, 1, 65543, 1, 1, 65544, 1, 1, 65545, 1, 1, 131081, 1, 1, 131082, 1, 1, 131083, 1, 1, 65547, 1, 1, 65548, 1, 1, 65549, 1, 1, 65550, 1, 1, 131086, 1, 1, 131085, 1, 1, 131087, 1, 1, 131088, 1, 1, 65552, 1, 1, 131090, 1, 1, 65534, 1, 0, 65533, 1, 0, 65532, 1, 0, 65531, 1, 0, 65530, 1, 0, 65529, 1, 0, 65528, 1, 0, 65527, 1, 0, 65526, 1, 0, 65525, 1, 0, 131070, 1, 1, 131069, 65537, 1, 131068, 1, 1, 131067, 65537, 0, 131066, 1, 1, 131065, 1, 1, 131064, 1, 1, 131063, 65537, 0, 131062, 1, 1, 131061, 1, 1, 196597, 1, 1, 196598, 1, 1, 196599, 1, 1, 196600, 65537, 1, 196601, 1, 1, 196602, 65537, 0, 196603, 65537, 1, 196604, 1, 1, 196605, 1, 1, 196606, 1, 1, 65524, 1, 0, 65523, 1, 0, 65522, 1, 0, 65521, 1, 0, 65520, 1, 0, 131059, 65537, 1, 196593, 65537, 1, 196592, 65537, 0, 131057, 65537, 0, 131056, 1, 1, 131058, 1, 1, 196594, 1, 1, 196595, 1, 1, 196596, 1, 1, 131060, 1, 1, 65519, 1, 0, 65518, 1, 0, 65517, 1, 0, 65516, 1, 0, 65515, 1, 0, 65514, 1, 0, 65513, 1, 0, 65512, 1, 0, 65511, 1, 0, 131052, 1, 1, 196585, 1, 1, 196584, 1, 1, 196589, 65537, 0, 131054, 1, 1, 196591, 1, 1, 131050, 1, 1, 131048, 1, 1, 131047, 1, 1, 131049, 1, 1, 196586, 1, 1, 196587, 1, 1, 131051, 65537, 1, 196588, 65537, 1, 131055, 65537, 1, 196583, 65537, 1, 131053, 65537, 0, 196590, 65537, 1, 41, 393217, 0, 42, 393217, 0, 43, 393217, 0, 44, 393217, 0, 45, 393217, 0, 46, 393217, 0, -65489, 393217, 0, -65488, 393217, 0, -65487, 393217, 0, -65486, 393217, 0, -65485, 393217, 0, -65484, 393217, 0, 65577, 393217, 1, 65578, 393217, 1, 65579, 393217, 1, 131116, 393217, 1, 131117, 393217, 1, 131118, 393217, 1, 65583, 393217, 1, 65584, 393217, 1, 65585, 393217, 1, 49, 393217, 1, 50, 393217, 1, 51, 393217, 1, 65582, 524289, 0, 65581, 524289, 0, 131114, 524289, 0, 65586, 524289, 0, 52, 524289, 0, 65587, 524289, 1, 65588, 524289, 1, 48, 524289, 1, 47, 524289, 1, 65580, 524289, 1, 131115, 524289, 1, 131113, 524289, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_qkk00")]
 z_index = 1
 position = Vector2(-2, -15)
 
 [node name="TileBorder" parent="." instance=ExtResource("3_27dpv")]
-position = Vector2(-323, 136)
-scale = Vector2(2, 2)
+position = Vector2(-481, 208)
+scale = Vector2(4, 4)
 
 [node name="PickUpItems" type="Node" parent="."]
 
@@ -43,6 +84,15 @@ item_texture = ExtResource("5_12y6g")
 item = ExtResource("6_77gny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupSheriff"]
+shape = SubResource("CircleShape2D_cgger")
+debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
+
+[node name="PickupRifle" parent="PickUpItems" instance=ExtResource("4_cgger")]
+position = Vector2(-155, -11)
+item_texture = ExtResource("7_i5bkb")
+item = ExtResource("8_5gjey")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpItems/PickupRifle"]
 shape = SubResource("CircleShape2D_cgger")
 debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 
@@ -67,7 +117,7 @@ shape = SubResource("CircleShape2D_cgger")
 debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 
 [node name="PickupPotion" parent="PickUpItems" instance=ExtResource("4_cgger")]
-position = Vector2(56, -10)
+position = Vector2(-268, -11)
 item_texture = ExtResource("11_iymn6")
 item = ExtResource("12_702mt")
 
@@ -77,7 +127,7 @@ shape = SubResource("CircleShape2D_cgger")
 debug_color = Color(0.7764706, 0.85882354, 0.15294118, 0.41960785)
 
 [node name="AmmoMachine" parent="." instance=ExtResource("8_70n8b")]
-position = Vector2(-172, -49)
+position = Vector2(-336, -47)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AmmoMachine"]
 position = Vector2(3, 3)
@@ -91,3 +141,22 @@ position = Vector2(235, -32)
 
 [node name="Testdummy2" parent="Dummy" instance=ExtResource("7_qu7gd")]
 position = Vector2(157, -31)
+
+[node name="Platform" type="Node" parent="."]
+
+[node name="Platform" parent="Platform" instance=ExtResource("17_5gjey")]
+position = Vector2(-175, -80)
+
+[node name="Platform2" parent="Platform" instance=ExtResource("17_5gjey")]
+position = Vector2(43, -112)
+scale = Vector2(0.8, 0.8)
+
+[node name="MovingPlatform" parent="Platform" instance=ExtResource("17_5gjey")]
+position = Vector2(339, 6)
+scale = Vector2(0.7, 0.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform/MovingPlatform"]
+libraries = {
+&"": SubResource("AnimationLibrary_1bj0i")
+}
+autoplay = "move"

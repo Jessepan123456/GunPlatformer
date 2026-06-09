@@ -13,13 +13,21 @@ func _ready() -> void:
 
 ##What happen when you pick up the item
 func picked_up() -> void:
-	var index = get_first_empty_slot()
+	var index = get_target_slot()
+	
+	if index == -1:
+		return
+	
 	PlayerManager.Inventory[index] = item
 	add_icon(index)
 	queue_free()
 
 ##Get the first slot so it moves over and not overlap
-func get_first_empty_slot() -> int:
+func get_target_slot() -> int:
+	var slot = PlayerManager.player.selected_slot
+	if slot != -1 && PlayerManager.player.is_slot_empty(slot):
+		return PlayerManager.player.selected_slot
+	
 	for i in range(PlayerManager.Inventory.size()):
 		if PlayerManager.Inventory[i] == null:
 			return i

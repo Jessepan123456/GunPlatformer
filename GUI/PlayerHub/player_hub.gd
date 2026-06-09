@@ -29,3 +29,6 @@ func _selected( index : int ) -> void:
 	
 func set_slot_icon( i : int, t : Texture2D ) -> void:
 	hotbar.set_icon(i, t)
+	
+func remove_slot_icon( i : int ) -> void:
+	hotbar.remove_icon(i)

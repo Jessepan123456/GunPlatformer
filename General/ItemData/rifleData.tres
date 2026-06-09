@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://d2kslflkkexv7"]
+
+[ext_resource type="Script" uid="uid://cu0y11e0voww7" path="res://General/ItemData/ItemData.gd" id="1_20ynw"]
+[ext_resource type="Texture2D" uid="uid://b5luyy3i4bxw8" path="res://General/art/Rifle_icon.png" id="1_ch3x7"]
+[ext_resource type="PackedScene" uid="uid://dgy8wvdk2y0cr" path="res://Weapons/Guns/rifle/rifle.tscn" id="2_s1g3l"]
+
+[resource]
+script = ExtResource("1_20ynw")
+name = "Rifle"
+icon = ExtResource("1_ch3x7")
+scene = ExtResource("2_s1g3l")
+metadata/_custom_type_script = "uid://cu0y11e0voww7"
