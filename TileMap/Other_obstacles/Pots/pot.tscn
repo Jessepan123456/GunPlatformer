@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://cb57dynvjvc8m"]
+
+[ext_resource type="Texture2D" uid="uid://cligf2euhhpec" path="res://TileMap/art/Yellow_Pot.png" id="1_1adir"]
+[ext_resource type="Script" uid="uid://dxrbk2xjabsti" path="res://TileMap/Other_obstacles/Pots/pot.gd" id="1_soch6"]
+[ext_resource type="PackedScene" uid="uid://yg4uesnud2xf" path="res://General/boxes/hurtbox.tscn" id="2_7ppuy"]
+[ext_resource type="Script" uid="uid://cm6fcs4c62ae" path="res://General/DamageNumber/damage_number_spawner.gd" id="4_fd1pq"]
+
+[sub_resource type="Animation" id="Animation_7ppuy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1adir"]
+resource_name = "broken"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_soch6"]
+_data = {
+&"RESET": SubResource("Animation_7ppuy"),
+&"broken": SubResource("Animation_1adir")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_soch6"]
+radius = 6.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_fd1pq"]
+
+[node name="Pot" type="Node2D"]
+script = ExtResource("1_soch6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_1adir")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_soch6")
+}
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_7ppuy")]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_soch6")
+
+[node name="DamageNumberSpawner" type="Node2D" parent="."]
+script = ExtResource("4_fd1pq")
+label_setting = SubResource("LabelSettings_fd1pq")
+metadata/_custom_type_script = "uid://cm6fcs4c62ae"

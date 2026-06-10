@@ -72,7 +72,7 @@ func _input(_event: InputEvent) -> void:
 				return
 			if PlayerManager.player_total_magazine <= 0:
 				return
-			holder.current_gun.reload()
+			holder.current_item.reload()
 		if Input.is_action_just_pressed("unequip"):
 			unequip()
 
