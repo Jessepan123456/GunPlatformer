@@ -2,10 +2,12 @@ class_name State_Idle extends State
 
 @onready var move: State_Move = $"../Move"
 @onready var jump: State_Jump = $"../Jump"
+@onready var death: State_Death = $"../Death"
 
 ## What happens when the player enters this sdtate
 func enter() -> void:
 	player.jumped = false
+	player.can_move = true
 	pass
 
 ## What happen when the player exits this state
@@ -16,6 +18,8 @@ func exit() -> void:
 func Process( _delta : float) -> State:
 	if abs(player.velocity.x) > 0.1:
 		return move
+	if player.died == true:
+		return death
 	
 	return null
 	

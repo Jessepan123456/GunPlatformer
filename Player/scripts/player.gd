@@ -7,6 +7,7 @@ class_name Player extends CharacterBody2D
 ##Player States
 @onready var animation_player: AnimationPlayer = $Animation/AnimationPlayer
 @onready var state_machine: State_Machine = $Statemachine
+@onready var player_sprite: Sprite2D = $PlayerSprite
 
 ##Guns
 @onready var holder: Node2D = $Holder
@@ -17,6 +18,12 @@ var is_gun := false
 
 var jumped : bool = false
 var falling : bool = false
+var died : bool = false
+
+##Allow the Player can or 
+var can_move : bool = true
+var can_hit : bool = true
+var knocked : bool = false
 
 ## Boxes
 @onready var hurtbox: HurtBox = $Hurtbox
@@ -27,8 +34,8 @@ func _ready() -> void:
 	state_machine.Initailize(self)
 	GameManager.player = self
 	PlayerManager.player = self
-	
-	hurtbox.damaged.connect( take_damage )
+	if can_hit == true:
+		hurtbox.damaged.connect( take_damage )
 	interaction_box.Ammo_reset.connect( reset_ammo )
 	
 	PlayerHub.set_hp(PlayerManager.hp)
@@ -46,7 +53,8 @@ func _physics_process(delta: float) -> void:
 	
 	var direction = Input.get_axis("Left","Right")
 	
-	velocity.x = direction * speed
+	if knocked == false && can_move:
+		velocity.x = direction * speed
 	move_and_slide()
 	
 ##Player Input
@@ -78,12 +86,22 @@ func _input(_event: InputEvent) -> void:
 
 ##HP 
 func take_damage( d : HitBox ) -> void:
-	if PlayerManager.hp <= 0:
-		GameManager.respawn()
-		PlayerManager.hp = 6
-		PlayerHub.update_hp_ui(PlayerManager.hp)
-	else:
+	if PlayerManager.hp <= 1:
 		update_hp(d)
+		died = true
+		can_hit = false
+		await get_tree().create_timer(2).timeout
+		GameManager.respawn()
+	else:
+		knocked = true
+		var knock_dir = sign(global_position.x - d.global_position.x)
+		velocity.x += knock_dir * 300
+		
+		$".".modulate = Color.RED
+		await get_tree().create_timer(0.2).timeout
+		$".".modulate = Color.WHITE
+		update_hp(d)
+	knocked = false
 	pass
 
 func update_hp( d : HitBox ) -> void:

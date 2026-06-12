@@ -75,7 +75,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q0lue"]
-size = Vector2(13, 11.5)
+size = Vector2(14, 11.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8cwk"]
 size = Vector2(12, 12)
@@ -108,5 +108,11 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_t8cwk")
 
 [node name="RightRayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 6)
+target_position = Vector2(5.5, 0)
+collision_mask = 3
 
 [node name="LeftRayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 6)
+target_position = Vector2(-5.5, 0)
+collision_mask = 3

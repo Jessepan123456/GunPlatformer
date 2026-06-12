@@ -186,4 +186,4 @@ position = Vector2(54, -139)
 pot_texture = ExtResource("22_uncvi")
 
 [node name="Slime" parent="." instance=ExtResource("23_l1y15")]
-position = Vector2(-617, -24)
+position = Vector2(-611, -24)

@@ -1,13 +1,10 @@
-class_name State_Move extends State
+class_name State_Death extends State
 
 @onready var idle: State_Idle = $"../Idle"
-@onready var jump: State_Jump = $"../Jump"
-@onready var death: State_Death = $"../Death"
 
 ## What happens when the player enters this state
 func enter() -> void:
-	player.jumped = false
-	player.can_move = true
+	player.can_move = false
 	pass
 
 ## What happen when the player exits this state
@@ -16,8 +13,8 @@ func exit() -> void:
 	
 ## What happen during the _process update in this state
 func Process( _delta : float) -> State:
-	if player.died == true:
-		return death
+	if player.died == false:
+		return idle
 	return null
 	
 ## What happen during the _physics_process update in this State
@@ -26,7 +23,4 @@ func Physics( _delta : float) -> State:
 	
 ## What happen with input events in this state
 func HandleInput( _event : InputEvent) -> State:
-	if Input.is_action_just_pressed("Jump") && player.is_on_floor():
-		player.velocity.y = -player.Jump_force 
-		return jump
 	return null
