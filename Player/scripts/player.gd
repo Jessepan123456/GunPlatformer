@@ -16,9 +16,11 @@ var selected_slot := -1
 var equipped_slot := -1
 var is_gun := false
 
+##Movement
 var jumped : bool = false
 var falling : bool = false
 var died : bool = false
+var rolling : bool = false
 
 ##Allow the Player can or 
 var can_move : bool = true
@@ -53,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	
 	var direction = Input.get_axis("Left","Right")
 	
-	if knocked == false && can_move:
+	if knocked == false && can_move && rolling == false:
 		velocity.x = direction * speed
 	move_and_slide()
 	
@@ -92,11 +94,12 @@ func take_damage( d : HitBox ) -> void:
 		can_hit = false
 		await get_tree().create_timer(2).timeout
 		GameManager.respawn()
+		hurtbox.set_deferred("monitorable", false)
 	else:
 		knocked = true
 		var knock_dir = sign(global_position.x - d.global_position.x)
 		velocity.x += knock_dir * 300
-		
+
 		$".".modulate = Color.RED
 		await get_tree().create_timer(0.2).timeout
 		$".".modulate = Color.WHITE

@@ -3,11 +3,13 @@ class_name State_Idle extends State
 @onready var move: State_Move = $"../Move"
 @onready var jump: State_Jump = $"../Jump"
 @onready var death: State_Death = $"../Death"
+@onready var roll: State_Roll = $"../Roll"
 
 ## What happens when the player enters this sdtate
 func enter() -> void:
 	player.jumped = false
 	player.can_move = true
+	player.rolling = false
 	pass
 
 ## What happen when the player exits this state
@@ -32,5 +34,7 @@ func HandleInput( _event : InputEvent) -> State:
 	if Input.is_action_just_pressed("Jump") && player.is_on_floor():
 		player.velocity.y = -player.Jump_force 
 		return jump
+	if Input.is_action_just_pressed("roll"):
+		return roll
 	return null
 	

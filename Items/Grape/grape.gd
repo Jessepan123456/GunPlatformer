@@ -1,4 +1,4 @@
-class_name Heal_Potion extends Node2D
+class_name Grape extends Node2D
 
 @export var heal := 0
 var used : bool = false

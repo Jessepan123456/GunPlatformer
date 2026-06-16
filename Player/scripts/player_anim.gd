@@ -13,4 +13,7 @@ func _physics_process(_delta: float) -> void:
 	animation_tree.set("parameters/Idle/blend_position", facing_dir)
 	animation_tree.set("parameters/Jump/blend_position", facing_dir)
 	animation_tree.set("parameters/Fall/blend_position", facing_dir)
+	animation_tree.set("parameters/Roll/blend_position", facing_dir)
+	animation_tree.set("parameters/Death/blend_position", facing_dir)
+	
 	

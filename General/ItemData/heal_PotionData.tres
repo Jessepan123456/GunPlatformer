@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_b4ccj")
 type = 1
-name = "Heal_Potion"
+name = "Grape"
 icon = ExtResource("1_laauc")
 scene = ExtResource("2_ahha8")
 metadata/_custom_type_script = "uid://cu0y11e0voww7"

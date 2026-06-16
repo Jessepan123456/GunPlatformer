@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cn8inqpr5kfw4"]
+[gd_scene load_steps=66 format=3 uid="uid://cn8inqpr5kfw4"]
 
 [ext_resource type="Script" uid="uid://dq2mrr7bkir6s" path="res://Player/scripts/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://3tvwi8rn3ykk" path="res://Player/art/knight.png" id="2_vtle1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c14bncx15nyui" path="res://Player/scripts/statemachine/states/fall.gd" id="7_od3ui"]
 [ext_resource type="Script" uid="uid://duhjphsk1ijct" path="res://Player/scripts/statemachine/states/death.gd" id="9_5htga"]
 [ext_resource type="Script" uid="uid://dfiflfoxi07u0" path="res://Player/scripts/holder.gd" id="9_x3vf3"]
+[ext_resource type="Script" uid="uid://csqmy1wkjxadr" path="res://Player/scripts/statemachine/states/roll.gd" id="10_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://yg4uesnud2xf" path="res://General/boxes/hurtbox.tscn" id="11_apopc"]
 [ext_resource type="Script" uid="uid://cjb6ecohci2lu" path="res://Player/interaction_box.gd" id="12_5htga"]
 
@@ -40,7 +41,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -56,7 +57,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_lfmf2"]
-resource_name = "death"
+resource_name = "death_left"
 length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -81,6 +82,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o28un"]
+resource_name = "death_right"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [56, 57, 58, 59]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_5htga"]
@@ -311,10 +340,67 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_pisgm"]
+resource_name = "roll_left"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45, 46, 47, 48]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_b1ygp"]
+resource_name = "roll_right"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45, 46, 47, 48]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00tjw"]
 _data = {
 &"RESET": SubResource("Animation_vtle1"),
-&"death": SubResource("Animation_lfmf2"),
+&"death_left": SubResource("Animation_lfmf2"),
+&"death_right": SubResource("Animation_o28un"),
 &"fall_left": SubResource("Animation_5htga"),
 &"fall_right": SubResource("Animation_dkpta"),
 &"idle_left": SubResource("Animation_00tjw"),
@@ -322,15 +408,22 @@ _data = {
 &"jump_left": SubResource("Animation_gu6f8"),
 &"jump_right": SubResource("Animation_p5o4e"),
 &"move_left": SubResource("Animation_x3vf3"),
-&"move_right": SubResource("Animation_apopc")
+&"move_right": SubResource("Animation_apopc"),
+&"roll_left": SubResource("Animation_pisgm"),
+&"roll_right": SubResource("Animation_b1ygp")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dkpta"]
-animation = &"death"
+animation = &"death_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b1ygp"]
+animation = &"death_right"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_lfmf2"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_dkpta")
-blend_point_0/pos = 0.0
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_b1ygp")
+blend_point_1/pos = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5o4e"]
 animation = &"fall_left"
@@ -381,6 +474,18 @@ blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_x3vf3")
 blend_point_1/pos = 1.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lfmf2"]
+animation = &"roll_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pisgm"]
+animation = &"roll_left"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_b1ygp"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_lfmf2")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_pisgm")
+blend_point_1/pos = -1.0
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x3vf3"]
 advance_mode = 2
 
@@ -429,6 +534,23 @@ advance_expression = "died
 advance_mode = 2
 advance_expression = "!died"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n471f"]
+advance_mode = 2
+advance_expression = "rolling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7emwf"]
+advance_mode = 2
+advance_expression = "!rolling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hshwv"]
+advance_mode = 2
+advance_expression = "rolling
+"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gpjlu"]
+advance_mode = 2
+advance_expression = "!rolling"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gwnis"]
 states/Death/node = SubResource("AnimationNodeBlendSpace1D_lfmf2")
 states/Death/position = Vector2(182, 187)
@@ -436,13 +558,16 @@ states/End/position = Vector2(901, 99)
 states/Fall/node = SubResource("AnimationNodeBlendSpace1D_dkpta")
 states/Fall/position = Vector2(627, 38)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_00tjw")
-states/Idle/position = Vector2(375, 94)
+states/Idle/position = Vector2(322, 232)
 states/Jump/node = SubResource("AnimationNodeBlendSpace1D_od3ui")
 states/Jump/position = Vector2(627, 192)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_apopc")
-states/Move/position = Vector2(375, 167)
+states/Move/position = Vector2(380, 111)
+states/Roll/node = SubResource("AnimationNodeBlendSpace1D_b1ygp")
+states/Roll/position = Vector2(633, 282)
 states/Start/position = Vector2(191, 111)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_od3ui"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_00tjw"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_apopc"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_5htga"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "Fall", "Move", SubResource("AnimationNodeStateMachineTransition_dkpta"), "Death", "Move", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "Move", "Death", SubResource("AnimationNodeStateMachineTransition_pisgm"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "Death", "Idle", SubResource("AnimationNodeStateMachineTransition_o28un")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_od3ui"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_00tjw"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_apopc"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_5htga"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "Fall", "Move", SubResource("AnimationNodeStateMachineTransition_dkpta"), "Death", "Move", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "Move", "Death", SubResource("AnimationNodeStateMachineTransition_pisgm"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "Death", "Idle", SubResource("AnimationNodeStateMachineTransition_o28un"), "Move", "Roll", SubResource("AnimationNodeStateMachineTransition_n471f"), "Roll", "Move", SubResource("AnimationNodeStateMachineTransition_7emwf"), "Idle", "Roll", SubResource("AnimationNodeStateMachineTransition_hshwv"), "Roll", "Idle", SubResource("AnimationNodeStateMachineTransition_gpjlu")]
+graph_offset = Vector2(79, 96)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_apopc"]
 radius = 13.0
@@ -463,7 +588,6 @@ texture_filter = 1
 position = Vector2(0, -11)
 scale = Vector2(2, 2)
 texture = ExtResource("2_vtle1")
-flip_h = true
 hframes = 8
 vframes = 8
 
@@ -492,11 +616,12 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_gwnis")
 advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Death/blend_position = -0.030184984
+parameters/Death/blend_position = -0.16455698
 parameters/Fall/blend_position = -0.47809154
-parameters/Idle/blend_position = -0.49411762
+parameters/Idle/blend_position = -0.10223955
 parameters/Jump/blend_position = 0.06470585
-parameters/Move/blend_position = -0.29019606
+parameters/Move/blend_position = -0.99610513
+parameters/Roll/blend_position = -0.14703017
 
 [node name="Statemachine" type="Node" parent="."]
 script = ExtResource("3_btcbx")
@@ -516,7 +641,8 @@ script = ExtResource("7_od3ui")
 [node name="Death" type="Node" parent="Statemachine"]
 script = ExtResource("9_5htga")
 
-[node name="Stun" type="Node" parent="Statemachine"]
+[node name="Roll" type="Node" parent="Statemachine"]
+script = ExtResource("10_p5o4e")
 
 [node name="Holder" type="Node2D" parent="."]
 script = ExtResource("9_x3vf3")

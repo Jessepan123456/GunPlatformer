@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b348f23qkf3g7"]
+[gd_scene load_steps=6 format=3 uid="uid://b348f23qkf3g7"]
 
 [ext_resource type="Script" uid="uid://ba1rpieqxq8m0" path="res://GUI/PlayerHub/player_hub.gd" id="1_s5k1c"]
 [ext_resource type="PackedScene" uid="uid://dokcxcso0742p" path="res://GUI/HotBar/Hotbar.tscn" id="2_apibh"]
+[ext_resource type="Texture2D" uid="uid://c44ojff77epys" path="res://GUI/art/Coin.png" id="3_f4i1b"]
+[ext_resource type="Texture2D" uid="uid://b4t7n0g4s8kqv" path="res://GUI/art/Ammo_Box.png" id="4_bcvhc"]
+[ext_resource type="Texture2D" uid="uid://d14jklxwhsei6" path="res://GUI/art/Heart_Icon.png" id="5_iasa8"]
 
 [node name="PlayerHub" type="CanvasLayer"]
 script = ExtResource("1_s5k1c")
@@ -54,3 +57,30 @@ offset_right = -249.0
 offset_bottom = 46.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="Coin" type="TextureRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -9.0
+offset_top = 577.0
+offset_right = 72.0
+offset_bottom = 653.0
+texture = ExtResource("3_f4i1b")
+
+[node name="Ammo" type="TextureRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1006.0
+offset_top = 598.0
+offset_right = 1076.0
+offset_bottom = 656.0
+texture = ExtResource("4_bcvhc")
+
+[node name="Heart" type="TextureRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 91.0
+offset_top = -7.0
+offset_right = 161.0
+offset_bottom = 51.0
+texture = ExtResource("5_iasa8")

@@ -5,6 +5,7 @@
 
 [node name="HealPotion" type="Node2D"]
 script = ExtResource("1_qejh1")
+heal = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
